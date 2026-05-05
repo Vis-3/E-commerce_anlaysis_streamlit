@@ -107,7 +107,13 @@ def churn_gauge(probability: float, label: str) -> go.Figure:
         ),
         title=dict(text="Churn Probability", font=dict(size=14, color="#94a3b8")),
     ))
-    fig.update_layout(**_LAYOUT, height=220, margin=dict(l=20, r=20, t=40, b=0))
+    layout = _LAYOUT.copy()
+    layout.update({
+        "height": 220,
+        "margin": dict(l=20, r=20, t=40, b=0),
+    })
+
+    fig.update_layout(**layout)
     return fig
 
 
@@ -448,14 +454,16 @@ def dow_heatmap(daily_kpis: list) -> go.Figure:
         hovertemplate="<b>%{x}</b>, Week %{y}<br>Revenue: $%{z:,.0f}<extra></extra>",
         colorbar=dict(title="Revenue ($)", tickfont=dict(color="#94a3b8")),
     ))
-    fig.update_layout(
-        **_LAYOUT,
-        title="Revenue Heatmap by Day of Week",
-        xaxis=dict(title=""),
-        yaxis=dict(title="", autorange="reversed"),
-        height=max(260, len(pivot) * 22),
-        margin=dict(l=60, r=10, t=40, b=10),
-    )
+    layout = _LAYOUT.copy()
+    layout.update({
+        "title": "Revenue Heatmap by Day of Week",
+        "xaxis": dict(title=""),
+        "yaxis": dict(title="", autorange="reversed"),
+        "height": max(260, len(pivot) * 22),
+        "margin": dict(l=60, r=10, t=40, b=10),
+    })
+
+    fig.update_layout(**layout)
     return fig
 
 
@@ -516,10 +524,12 @@ def category_treemap(categories: list) -> go.Figure:
         ),
         textfont=dict(size=13),
     ))
-    fig.update_layout(
-        **_LAYOUT,
-        title="Category Revenue Treemap (last 30 days)",
-        height=380,
-        margin=dict(l=0, r=0, t=40, b=0),
-    )
+    layout = _LAYOUT.copy()
+    layout.update({
+        "title": "Category Revenue Treemap (last 30 days)",
+        "height": 380,
+        "margin": dict(l=0, r=0, t=40, b=0),
+    })
+
+    fig.update_layout(**layout)
     return fig
