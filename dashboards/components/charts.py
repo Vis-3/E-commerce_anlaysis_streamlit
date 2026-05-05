@@ -390,7 +390,7 @@ def segment_radar_chart(segments: list) -> go.Figure:
             r=scores, theta=labels, fill="toself",
             name=name,
             line=dict(color=palette[i % len(palette)]),
-            fillcolor=hex_to_rgba(palette[i % len(palette)], 0.15)",
+            fillcolor=hex_to_rgba(palette[i % len(palette)], 0.15),
             opacity=0.85,
             hovertemplate=f"<b>{name}</b><br>%{{theta}}: %{{r:.2f}}<extra></extra>",
         ))
