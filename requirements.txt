@@ -25,6 +25,7 @@ pyspark==3.5.0
 
 # Visualization
 streamlit==1.37.1
+streamlit-autorefresh==1.0.1
 plotly==5.18.0
 
 # ML Libraries
