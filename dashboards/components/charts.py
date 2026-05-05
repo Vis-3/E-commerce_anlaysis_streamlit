@@ -289,20 +289,30 @@ def rfm_scatter_chart(data: list) -> go.Figure:
             ),
         ))
 
-    fig.update_layout(
-        **_LAYOUT,
-        title="RFM Customer Map — Recency vs Frequency (bubble = spend)",
-        xaxis=dict(
+    layout = _LAYOUT.copy()
+    layout.pop("legend", None)  # 👈 remove conflict
+
+    layout.update({
+        "title": "RFM Customer Map — Recency vs Frequency (bubble = spend)",
+        "xaxis": dict(
             title="Recency (days since last purchase) →  higher = worse",
-            gridcolor="rgba(255,255,255,0.06)", autorange="reversed",
+            gridcolor="rgba(255,255,255,0.06)",
+            autorange="reversed",
         ),
-        yaxis=dict(title="Frequency (total orders)", gridcolor="rgba(255,255,255,0.06)"),
-        height=500,
-        legend=dict(
-            bgcolor="rgba(20,22,32,0.85)", bordercolor="rgba(255,255,255,0.1)",
-            borderwidth=1, font=dict(size=11),
+        "yaxis": dict(
+            title="Frequency (total orders)",
+            gridcolor="rgba(255,255,255,0.06)",
         ),
-    )
+        "height": 500,
+        "legend": dict(
+            bgcolor="rgba(20,22,32,0.85)",
+            bordercolor="rgba(255,255,255,0.1)",
+            borderwidth=1,
+            font=dict(size=11),
+        ),
+    })
+
+    fig.update_layout(**layout)
     return fig
 
 
