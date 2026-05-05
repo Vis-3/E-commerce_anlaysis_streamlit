@@ -62,7 +62,7 @@ def revenue_trend_chart(daily_kpis: list) -> go.Figure:
         ),
     })
 
-fig.update_layout(**layout)
+    fig.update_layout(**layout)
     return fig
 
 
