@@ -41,13 +41,28 @@ def revenue_trend_chart(daily_kpis: list) -> go.Figure:
         yaxis="y2",
         hovertemplate="AOV: $%{y:,.2f}<extra></extra>",
     ))
-    fig.update_layout(
-        **_LAYOUT,
-        title="30-Day Revenue Trend with 7-Day Moving Average",
-        yaxis=dict(title="Revenue ($)", gridcolor="rgba(255,255,255,0.06)"),
-        yaxis2=dict(title="AOV ($)", overlaying="y", side="right", gridcolor="rgba(0,0,0,0)"),
-        bargap=0.3, hovermode="x unified",
-    )
+    layout = _LAYOUT.copy()
+    layout.update({
+        "title": "RFM Customer Map — Recency vs Frequency (bubble = spend)",
+        "xaxis": dict(
+            title="Recency (days since last purchase) →  higher = worse",
+            gridcolor="rgba(255,255,255,0.06)",
+            autorange="reversed",
+        ),
+        "yaxis": dict(
+            title="Frequency (total orders)",
+            gridcolor="rgba(255,255,255,0.06)"
+        ),
+        "height": 500,
+        "legend": dict(
+            bgcolor="rgba(20,22,32,0.85)",
+            bordercolor="rgba(255,255,255,0.1)",
+            borderwidth=1,
+            font=dict(size=11),
+        ),
+    })
+
+fig.update_layout(**layout)
     return fig
 
 
