@@ -17,6 +17,13 @@ _LAYOUT = dict(
 
 # ── Existing charts ───────────────────────────────────────────────────────────
 
+def hex_to_rgba(hex_color, alpha=0.15):
+    hex_color = hex_color.lstrip("#")
+    r = int(hex_color[0:2], 16)
+    g = int(hex_color[2:4], 16)
+    b = int(hex_color[4:6], 16)
+    return f"rgba({r},{g},{b},{alpha})"
+
 def revenue_trend_chart(daily_kpis: list) -> go.Figure:
     """Revenue bars + AOV line + 7-day moving average."""
     df = pd.DataFrame(reversed(daily_kpis))
@@ -383,8 +390,7 @@ def segment_radar_chart(segments: list) -> go.Figure:
             r=scores, theta=labels, fill="toself",
             name=name,
             line=dict(color=palette[i % len(palette)]),
-            fillcolor=palette[i % len(palette)].replace(")", ",0.15)").replace("rgb", "rgba")
-                if "rgb" in palette[i % len(palette)] else palette[i % len(palette)] + "26",
+            fillcolor=hex_to_rgba(palette[i % len(palette)], 0.15)",
             opacity=0.85,
             hovertemplate=f"<b>{name}</b><br>%{{theta}}: %{{r:.2f}}<extra></extra>",
         ))
